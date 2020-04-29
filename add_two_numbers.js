@@ -29,18 +29,18 @@ const addTwoNumbers = function (l1, l2) {
 
 
 	// Instatiate a new linked list
-	let resultList = new ListNode(BigInt(reversedTotal[0]))
+	let resultList = new ListNode(BigInt(reversedTotal[0]));
 
-	let current = resultList
+	let current = resultList;
 
 	// Convert array to linked list
 	for (let i = 1; i < reversedTotal.length; i++) {
-		current.next = new ListNode(BigInt(reversedTotal[i]))
-		current = current.next
+		current.next = new ListNode(BigInt(reversedTotal[i]));
+		current = current.next;
 	}
 
 
-	return resultList
+	return resultList;
 
 
 };
