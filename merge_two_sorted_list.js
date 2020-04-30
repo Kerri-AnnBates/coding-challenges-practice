@@ -1,6 +1,3 @@
-// [1, 2, 4]
-// [1, 3, 4]
-
 /**
  * Definition for singly-linked list.
  * function ListNode(val) {
@@ -16,50 +13,50 @@
 var mergeTwoLists = function (l1, l2) {
 	let current1 = l1;
 	let current2 = l2;
-	let lastLink = null;
-	let newList = new ListNode();
-
-	// Instantiate the linked list with a head, which is first value in the first linked list.
-	// update current to the next linked item in the list.
-	// Set last link to the newly created linked list, to keep track of the last element in the list for future updates.
-
-	console.log("Initial:", newList);
-
-	if (l1 == null && l2 == null) {
-		return l1;
-	}
-
-	if (l1 !== null) {
-		newList = new ListNode(current1.val);
-		current1 = current1.next;
-		lastLink = newList;
-	} else if (l2 !== null) {
-		newList = new ListNode(current2.val);
-		current2 = current2.next;
-		lastLink = newList;
-	}
-
-	console.log(newList)
-	console.log(current2)
-
-
+	let newList = new ListNode(0); // Instantiate the linked list with a head, which is first value in the first linked list.
+	let lastLink = newList; // Set last link to the newly created linked list, to keep track of the last element in the list for future updates.
 
 	while ((current1 !== null) || (current2 !== null)) {
-
-
-		if (current2 !== null) {
-			lastLink.next = new ListNode(current2.val);
+		// If list 1 is null just set last link to list 2 item and move on.
+		if (current1 === null) {
+			lastLink.next = current2;
 			current2 = current2.next;
-			lastLink = lastLink.next;
+			break;
 		}
 
-		if (current1 !== null) {
+		// If list 2 is null set last link to list 1 item and break;
+		if (current2 === null) {
+			lastLink.next = current1;
+			current1 = current1.next;
+			break;
+		}
+
+		// If list 1 item is less than list 2 item, add list 1 to the new linked list else if list 2 item is less than list 1 item, add list 2 item to new linked list. else if they're equal just add to linked list in order of list 1, then list 2 item.
+		if ((current1 && current1.val < current2.val)) {
+
 			lastLink.next = new ListNode(current1.val);
 			current1 = current1.next;
 			lastLink = lastLink.next;
+
+		} else if ((current2 && current2.val < current1.val)) {
+
+			lastLink.next = new ListNode(current2.val);
+			current2 = current2.next;
+			lastLink = lastLink.next;
+
+		} else {
+
+			lastLink.next = new ListNode(current1.val);
+			current1 = current1.next;
+			lastLink = lastLink.next;
+			lastLink.next = new ListNode(current2.val);
+			current2 = current2.next;
+			lastLink = lastLink.next;
+
 		}
 
 	}
 
-	return newList
+
+	return newList.next;
 };
